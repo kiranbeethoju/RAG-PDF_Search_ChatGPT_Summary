@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            width: 60%; /* Adjust the width as needed */
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        #progress {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload PDF</h1>
+    <form id="uploadForm" action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="pdf_file">
+        <input type="submit" value="Upload">
+    </form>
+    <div id="progress"></div>
+
+    <script>
+        // Function to fetch progress updates
+        function fetchProgress() {
+            fetch('/progress')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('progress').innerHTML = `Progress: ${data.progress.toFixed(2)}%`;
+                // Check if processing is complete
+                if (data.progress == 100) {
+                    clearInterval(progressInterval);
+                    document.getElementById('progress').innerHTML += "<br>Processing complete.";
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        // Periodically fetch progress updates
+        const progressInterval = setInterval(fetchProgress, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 60%; /* Adjust the width as needed */
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .results-container {
+            width: 60%; /* Adjust the width as needed */
+            margin: 0 auto;
+        }
+        .summary {
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .result {
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .result p {
+            margin: 5px 0;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #ccc;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search</h1>
+    <form method="post">
+        <input type="text" name="query" placeholder="Enter your search query">
+        <input type="submit" value="Search">
+    </form>
+    {% if results %}
+        <div class="results-container">
+            <div class="summary">
+                <h2>Summary Answer</h2>
+                <p>Summarized Results: {{ resultsSum }}</p>
+            </div>
+            <div class="results">
+                <h2>Results</h2>
+                {% for text, date, score in results %}
+                    <div class="result">
+                        <p><strong>Text:</strong> {{ text }}</p>
+                        <p><strong>Date:</strong> {{ date }}</p>
+                        <p><strong>Score:</strong> {{ score }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</body>
+</html>
