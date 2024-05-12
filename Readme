@@ -1,5 +1,7 @@
 Clone this repository by using 
 
+Open one terminal1 
+
 command 1
 git clone https://github.com/kiranbeethoju/RAG-PDF_Search_ChatGPT_Summary
 
@@ -9,3 +11,14 @@ cd RAG-PDF_Search_ChatGPT_Summary
 command 3
 pip3 install -r requirements.txt
 
+Open another terminal2 
+
+command 4 (this will pull qdrant docker container of qdrant)
+docker run -p 6333:6333 qdrant/qdrant
+
+once the docker is pulled you can check the qdrant on browser by opening http://localhost:6333/dashboard
+
+command 5 in terminal1
+python3 v2.py
+
+Now open the browser localhost:5000
