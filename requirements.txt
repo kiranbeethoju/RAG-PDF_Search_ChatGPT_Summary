@@ -1,0 +1,8 @@
+flask
+PyPDF2
+FlagEmbedding
+qdrant_client
+pytesseract
+pdf2image
+wand
+openai
